@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Contacto</h1>
+  <form id="contactForm">
+    <input type="text" name="nombre" placeholder="Tu nombre" required><br>
+    <input type="email" name="email" placeholder="Tu correo" required><br>
+    <textarea name="mensaje" placeholder="Escribe tu mensaje aquí" required></textarea><br>
+    <button type="submit">Enviar</button>
+  </form>
+  <script>
+    const botToken = "7956230915:AAFpPs30DwgInEvn3rpOgqNyIII0lCDWeas";
+    const chatId = "2044253134";
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nombre = this.nombre.value;
+      const email = this.email.value;
+      const mensaje = this.mensaje.value;
+      const texto = `📩 Nuevo mensaje de contacto:\n👤 Nombre: ${nombre}\n📧 Correo: ${email}\n📝 Mensaje: ${mensaje}`;
+      fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(texto)}`)
+        .then(res => alert("Mensaje enviado a Telegram!"))
+        .catch(err => alert("Error al enviar el mensaje."));
+    });
+  </script>
+</body>
+</html>
